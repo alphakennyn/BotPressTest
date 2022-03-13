@@ -22,10 +22,15 @@
   margin: 2rem;
 }
 
-.directory-tree {
+.directory-tree-container {
   background-color: #FFFFFF;
   padding: 2rem;
   border-radius: 10px;
+}
+
+.directory-tree {
+  margin: 1rem 0;
+  border: 1px black solid;
 }
 
 #error-message {
@@ -40,6 +45,10 @@
   /* position: absolute; */
   display: flex;
   justify-content: center;
+}
+
+.inline {
+  display: inline;
 }
 
 .rotate {

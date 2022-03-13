@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import DirectoryTree from "../DirectoryTree";
+import Loading from "../Loading";
 
-const DirectoryBox = ({ viewingDirectoryList = [] }) => {
-    console.log(viewingDirectoryList)
+const DirectoryBox = ({ viewingDirectoryList, isLoadingNewDirectory }) => {
 
   return (
     viewingDirectoryList.length > 0 ? (
       <div id="directory-box">
+        {
+          isLoadingNewDirectory && <Loading />
+        }
         {viewingDirectoryList.map((directory) => (
-          <DirectoryTree directoryItems={directory} />
+          <DirectoryTree directoryItems={directory.data} searchedDate={directory.searchedDate}/>
         ))}
       </div>
     ) : ''

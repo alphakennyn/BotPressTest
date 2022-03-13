@@ -10,13 +10,23 @@ import './App.css';
 
 function App() {
   const [directoryList, setDirectoryList] = useState([])
+  const [isError, setError] = useState(false)
+  const [isLoadingNewDirectory, setLoadingNewDirectory] = useState(false)
 
   const submitHandler = async (path) => {
     try {
-      const { data } = await getItemsInDirectory(path)
-      setDirectoryList([...directoryList, data])
+      setError(false)
+      setLoadingNewDirectory(true)
+      const list = await getItemsInDirectory(path)
+      const data = {
+        ...list,
+      searchedDate: new Date()
+      }
+      setDirectoryList([data, ...directoryList])
     } catch (error) {
-      console.error(error.message)
+      setError(true)
+    } finally {
+      setLoadingNewDirectory(false)
     }
   }
 
@@ -26,7 +36,10 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
         <PathInput submitHandler={submitHandler} />
       </div>
-      <DirectoryBox viewingDirectoryList={directoryList}/>
+      {
+        isError && <p id="error-message">An error has occured. Please try again.</p>
+      }
+      <DirectoryBox viewingDirectoryList={directoryList} isLoadingNewDirectory={isLoadingNewDirectory}/>
     </div>
   );
 }
