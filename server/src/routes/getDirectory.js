@@ -1,4 +1,3 @@
-const labelDiretoryItems = require('../middlewares/labelDiretoryItems')
 const readDirectory = require('../middlewares/readDirectory')
 
 const getDirectory = (req, res) => {
@@ -9,6 +8,5 @@ const getDirectory = (req, res) => {
 
 module.exports = [
     readDirectory,
-    labelDiretoryItems,
     getDirectory
 ]
