@@ -1,22 +1,30 @@
 .App {
   text-align: center;
+  background-color: #ececec;
+  min-height: 100vh;
+
 }
 
 .App-logo {
   pointer-events: none;
+  max-height: 6rem;
+
 }
 
 .App-header {
   background-color: #ececec;
-  min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  /* font-size: calc(10px + 2vmin); */
-  /* color: white; */
 }
 
-.App-link {
-  color: #61dafb;
+#directory-box {
+  margin: 2rem;
+}
+
+.directory-tree {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 10px;
 }
