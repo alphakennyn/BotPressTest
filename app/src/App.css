@@ -8,7 +8,6 @@
 .App-logo {
   pointer-events: none;
   max-height: 6rem;
-
 }
 
 .App-header {
@@ -27,4 +26,31 @@
   background-color: #FFFFFF;
   padding: 2rem;
   border-radius: 10px;
+}
+
+#error-message {
+  color: red;
+}
+
+#loading-icon img {
+    height: 4rem;
+}
+
+#loading-icon {
+  /* position: absolute; */
+  display: flex;
+  justify-content: center;
+}
+
+.rotate {
+  animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
 }
