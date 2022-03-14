@@ -28,6 +28,7 @@ app.get("/event/init", (request, response, next) => {
 
   const clientId = Date.now();
 
+  response.write(`data: ${(JSON.stringify({ clientId }))}\n\n`);
   const newClient = {
     id: clientId,
     response,
@@ -42,8 +43,9 @@ app.get("/event/init", (request, response, next) => {
 });
 
 app.get('/event/fileChange', (req, res) => {
+  // TODO pass clientId into query
     const {path} = req.query; 
-    clients.forEach(client => client.response.write(`data: ${JSON.stringify(path)}\n\n`))
+    clients.forEach(client => client.response.write(`data: ${JSON.stringify({ path })}\n\n`))
 })
 
 app.listen(port, () => {

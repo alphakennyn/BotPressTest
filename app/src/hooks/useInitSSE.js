@@ -1,19 +1,22 @@
 import React, { useEffect } from "react";
 import { GET_INIT_EVENT_URL } from "../utils/constants";
 
-const useInitSSE = (setter) => {
+const useInitSSE = (setPathChanged, setClientId ) => {
   useEffect(() => {
     const source = new EventSource(GET_INIT_EVENT_URL);
 
-    source.addEventListener('open', () => {
-      console.log("Subscribed!");
+    source.addEventListener('open', (message) => {
+      console.log('Successfully subscribed!');
     });
 
     source.addEventListener('message', (message) => {
-      console.log("Got", message);
-
-      // Display the event data in the `content` div
-      setter()
+      const data = JSON.parse(message.data);
+      console.log("Message received: ", data);
+      if (data.clientId) {
+        setClientId(data.clientId)
+      } else if (data.path) {
+        setPathChanged(data.path)
+      }
     });
 
     return () => {
