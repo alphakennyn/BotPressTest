@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PathInput from './components/PathInput';
 import DirectoryBox from './components/DirectoryBox';
 import { getItemsInDirectory } from './utils/rest';
+import useInitSSE from './hooks/useInitSSE';
 
 import logo from './botpress-logo.png';
 import './App.css';
@@ -9,20 +10,27 @@ import './App.css';
 // c:/Users/Kenny/Documents/MyCode/server-practice
 
 function App() {
+  const [clientId, setClientId] = useState(null)
   const [directoryList, setDirectoryList] = useState([])
   const [isError, setError] = useState(false)
   const [isLoadingNewDirectory, setLoadingNewDirectory] = useState(false)
+
+  useInitSSE((pathChanged) => console.log(pathChanged, 'changed'), setClientId);
+
+  const loadDirectoryItems = async (path) => {
+    const list = await getItemsInDirectory(path)
+    const data = {
+      ...list,
+      searchedDate: new Date()
+    }
+    setDirectoryList([data, ...directoryList])
+  }
 
   const submitHandler = async (path) => {
     try {
       setError(false)
       setLoadingNewDirectory(true)
-      const list = await getItemsInDirectory(path)
-      const data = {
-        ...list,
-      searchedDate: new Date()
-      }
-      setDirectoryList([data, ...directoryList])
+      await loadDirectoryItems(path)
     } catch (error) {
       setError(true)
     } finally {
