@@ -20,7 +20,7 @@ const readDirectory = async (dirname) => {
     );
     return files;
   } catch (error) {
-    logger(error.message);
+    logger.error(error.message);
     throw error;
   }
 };

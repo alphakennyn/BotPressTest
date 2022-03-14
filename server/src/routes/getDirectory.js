@@ -1,4 +1,5 @@
 const readDirectory = require('../middlewares/readDirectory')
+const watchDirectory = require('../middlewares/watchDirectory')
 
 const getDirectory = (req, res) => {
     res.status(200).json({
@@ -8,5 +9,6 @@ const getDirectory = (req, res) => {
 
 module.exports = [
     readDirectory,
+    watchDirectory,
     getDirectory
 ]
