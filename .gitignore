@@ -4,6 +4,7 @@ TODO.md
 # dependencies
 /app/node_modules
 /server/node_modules
+/event-server/node_modules
 /app/.pnp
 .pnp.js
 
