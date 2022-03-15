@@ -5,20 +5,16 @@ import Loading from "../Loading";
 const DirectoryBox = ({ viewingDirectoryList, isLoadingNewDirectory }) => {
   return (
     <div class="center">
-      {viewingDirectoryList.length > 0 ? (
-        <div id="directory-box">
-          {isLoadingNewDirectory && <Loading />}
-          {viewingDirectoryList.map((directory) => (
-            <DirectoryTree
-              directoryItems={directory.data}
-              searchedDate={directory.searchedDate}
-              path={directory.path}
-            />
-          ))}
-        </div>
-      ) : (
-        ""
-      )}
+      <div id="directory-box">
+        {isLoadingNewDirectory && <Loading />}
+        {viewingDirectoryList.map((directory) => (
+          <DirectoryTree
+            directoryItems={directory.data}
+            searchedDate={directory.searchedDate}
+            path={directory.path}
+          />
+        ))}
+      </div>
     </div>
   );
 };
