@@ -15,15 +15,19 @@ function App() {
   const [isError, setError] = useState(false)
   const [isLoadingNewDirectory, setLoadingNewDirectory] = useState(false)
 
-  useInitSSE((pathChanged) => console.log(pathChanged, 'changed'), setClientId);
+  useInitSSE((pathChanged) => loadDirectoryItems(pathChanged), setClientId);
 
   const loadDirectoryItems = async (path) => {
     const list = await getItemsInDirectory(path)
     const data = {
       ...list,
+      path,
       searchedDate: new Date()
     }
-    setDirectoryList([data, ...directoryList])
+    setDirectoryList((prevList) => {
+      const listWithoutOldPath = prevList.filter((directory) => directory.path !== path)
+      return [data, ...listWithoutOldPath]
+    })
   }
 
   const submitHandler = async (path) => {

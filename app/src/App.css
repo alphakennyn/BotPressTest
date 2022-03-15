@@ -18,6 +18,11 @@
   justify-content: center;
 }
 
+#directory-container {
+  display: flex;
+  justify-content: center;
+}
+
 #directory-box {
   margin: 2rem;
 }
@@ -26,11 +31,12 @@
   background-color: #FFFFFF;
   padding: 2rem;
   border-radius: 10px;
+  margin-bottom: 2rem;
 }
 
 .directory-tree {
   margin: 1rem 0;
-  border: 1px black solid;
+  border: 1px #e7e7e7 solid;
 }
 
 #error-message {
@@ -42,13 +48,17 @@
 }
 
 #loading-icon {
-  /* position: absolute; */
   display: flex;
   justify-content: center;
 }
 
 .inline {
   display: inline;
+}
+
+.display-column {
+  display: flex;
+  flex-direction: column;
 }
 
 .rotate {
