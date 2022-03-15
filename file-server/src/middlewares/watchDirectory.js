@@ -8,6 +8,7 @@ const { normalize, join } = require("path");
 const EVENT_SERVER_URL = "http://localhost:3002/event/fileChange";
 
 const CHANGE_EVENT = 'change'
+let wait = false;
 
 module.exports = (req, res, next) => {
   try {
@@ -16,8 +17,7 @@ module.exports = (req, res, next) => {
 
     const watchOptions = {
       depth: 99,
-      usePolling: true,
-      interval: 300,
+      usePolling: true
     };
 
     if (ignoreDot) {
@@ -26,13 +26,18 @@ module.exports = (req, res, next) => {
 
     const watcher = chokidar.watch(path, watchOptions);
 
-    watcher.on("raw", async (event, filename) => {
+    watcher.on("raw", (event, filename) => {
     // watcher.on("raw", async (filename) => {
         try {
-          const file = normalize(join(path, filename));
-          logger.event.log('change', file);
+          logger.event.log(event, filename);
           if (event === CHANGE_EVENT) {
-          //   await http.get(`${EVENT_SERVER_URL}?path=${path}`);
+            if (wait) return
+            wait = true;
+            setTimeout(async() => {
+              logger.info('change event detected, messaging client')
+              await http.get(`${EVENT_SERVER_URL}?path=${path}&clientId=${clientId}`);
+              wait = false;
+            }, 100);
           }
           // dont forget to throttle as rename event is dispatched twice
         } catch (e) {
