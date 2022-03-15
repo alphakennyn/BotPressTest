@@ -18,7 +18,7 @@ function App() {
   useInitSSE((pathChanged) => loadDirectoryItems(pathChanged), setClientId);
 
   const loadDirectoryItems = async (path) => {
-    const list = await getItemsInDirectory(path)
+    const list = await getItemsInDirectory(path, clientId)
     const data = {
       ...list,
       path,

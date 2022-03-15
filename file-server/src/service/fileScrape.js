@@ -9,7 +9,6 @@ const readDirectory = async (dirname) => {
     const dirents = await readdir(dirname, { withFileTypes: true });
     const files = await Promise.all(
       dirents.filter((dirent) => {
-        console.log(dirent)
         if (FOLDERS_IGNORE.includes(dirent.name)) {
           return false
         }

@@ -1,5 +1,6 @@
 const chokidar = require("chokidar");
-const http = require("http");
+const http = require('http')
+
 const {
   EVENT_SERVER_URL,
   CHANGE_EVENT,
@@ -12,7 +13,7 @@ let wait = false;
 
 module.exports = (req, res, next) => {
   try {
-    const { path, clientId, ignoreDot } = req.query;
+    const { path, clientId } = req.query;
     logger.info(`Watching ${path}`);
 
     const watchOptions = {

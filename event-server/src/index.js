@@ -44,8 +44,13 @@ app.get("/event/init", (request, response, next) => {
 
 app.get('/event/fileChange', (req, res) => {
   // TODO pass clientId into query
-    const {path} = req.query; 
-    clients.forEach(client => client.response.write(`data: ${JSON.stringify({ path })}\n\n`))
+    const {path, clientId } = req.query; 
+    clients.forEach(async (client) => {
+      if (client.id === JSON.parse(clientId)) {
+        console.log('writing to', client.id)
+        await client.response.write(`data: ${JSON.stringify({ path })}\n\n`)
+      }
+    })
 })
 
 app.listen(port, () => {
