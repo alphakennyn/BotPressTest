@@ -18,9 +18,25 @@
   justify-content: center;
 }
 
-#directory-container {
+.min-width {
+  min-width: 600px;
+}
+
+.input-box {
+  font-size: 16px;
+}
+
+.center {
   display: flex;
   justify-content: center;
+}
+
+.vertical-margin {
+  margin: 2rem 0;
+}
+
+.margin-btn-space {
+  margin-bottom: 1rem;
 }
 
 #directory-box {
@@ -63,6 +79,18 @@
 
 .rotate {
   animation: rotation 2s infinite linear;
+}
+
+#btn-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+#btn-group button {
+  font-size: 16px;
+  padding: 1rem;
+  background-color: white;
+  border: 1px #e7e7e7 solid;
 }
 
 @keyframes rotation {

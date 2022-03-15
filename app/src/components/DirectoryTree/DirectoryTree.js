@@ -15,7 +15,7 @@ const DirectoryTree = ({ directoryItems, searchedDate, path }) => {
   }, [directoryItems]);
 
   return (
-    <div class="directory-tree-container">
+    <div class="directory-tree-container container min-width">
       <div class="display-column">
         <span className="directory-details">
           <b className="inline">Path: </b>

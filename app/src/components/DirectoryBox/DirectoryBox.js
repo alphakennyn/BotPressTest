@@ -4,7 +4,7 @@ import Loading from "../Loading";
 
 const DirectoryBox = ({ viewingDirectoryList, isLoadingNewDirectory }) => {
   return (
-    <div id="directory-container">
+    <div class="center">
       {viewingDirectoryList.length > 0 ? (
         <div id="directory-box">
           {isLoadingNewDirectory && <Loading />}

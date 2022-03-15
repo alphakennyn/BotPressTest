@@ -5,6 +5,10 @@ const usePathsManager = (setPathChanged, setClientId ) => {
     const [pathList, setPathList] = useState([])
 
     const verifyPath = (path) => {
+        if (!path) {
+            throw new Error('Path cannot be empty')
+        }
+
         const isUnique = pathList.some((item) => path === item)
 
         if (isUnique) {
@@ -20,21 +24,15 @@ const usePathsManager = (setPathChanged, setClientId ) => {
         });
     }
     
-
-    const cleanUpPath = (path) => {
-        return path.replace(/\s/g, "")
-    }
-
     const addPath = (paths) => {
         paths.forEach(path => {
-            const cleanedPath = cleanUpPath(path)
             setPathList((prevList) => [...prevList, path])
         })
     }
 
     return [
         addPath,
-        verifyPath
+        verifyPath,
     ]
 };
 
