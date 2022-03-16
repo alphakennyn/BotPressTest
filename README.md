@@ -31,11 +31,11 @@ I created a monorepo for this test. There are 3 different folders which contains
 
 > Please excuse my paint drawing :)
 
-I realise I can keep the merge the file and event server together, however I wanted to separate the server responsibilities. 
-
 Upon landing on the web server, the client is immediately subscribed to the event server. Once subscribed, the Event Server creates a client ID (`Date.now()`). 
 
 When the client sends the get directory request, the File Server starts watching that directory. Any changes that happen in the directory, will send an HTTP request to the event server which includes the client ID that was subscribed. The File server is in charge of sending out a request for every client that is "watching" the directory.
+
+The reason why I chose to separate the event server from the file server was to separate responsibilities. In addition to event managing, the event server also acts as user management as well. This allows multiple clients to watch the same directory and be notified.
 
 ---
 
@@ -44,7 +44,16 @@ When the client sends the get directory request, the File Server starts watching
 I'm using `node 14.19.0`
 
 ---
-## Frontend
+## Usage
+
+By default directories will be ignored:
+
+- node_modules
+- .git
+
+> Warning: File watchers do not close (did not implement), so be sure to end the file-server once done to prevent further CPU usage
+
+### Frontend
 
 ```sh
 cd app
@@ -56,8 +65,6 @@ http://localhost:3000
 
 ![Example of working](/LandingPage.png)
 > You should see this
-
-## Servers
 
 ### File server
 
@@ -85,5 +92,7 @@ Given the amount of time, I missed out on a few more implementation and decision
 
 - Add feature to do modifications from the web server
 - Dockerize the application to run everything from 1 script
-- Build some repository that manages the watchers and inject that into file-server middlewares.
+- Build some repository that manages the file watchers and inject that into file-server middlewares.
+    - close watcher if user disconnects.
 - Improve logging (winston)
+- UI layout? (css is not my forte :))
